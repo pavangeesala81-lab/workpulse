@@ -1669,134 +1669,18 @@ input,textarea,select{font-family:inherit;font-size:14px}
           </div>
         </div>
 
+        <div class="pulse-hero" id="pulse-hero" style="display:none"></div>
+
         <div class="dashboard-cols">
           <div class="dashboard-main">
             <div id="timeline-view"></div>
             <div id="grid-view" style="display:none" class="cards-grid"></div>
           </div>
           <div class="dashboard-side" id="side-panels">
-            <!-- Team health panel -->
-            <div class="side-panel" id="side-team-health" style="display:none">
-        <div class="pulse-hero" id="pulse-hero" style="display:none">
-          <div class="pulse-score-block">
-            <div class="pulse-ring">
-              <svg class="pulse-ring-svg" viewBox="0 0 72 72">
-                <circle class="pulse-ring-track" cx="36" cy="36" r="30"/>
-                <circle class="pulse-ring-fill" id="pulse-ring-fill" cx="36" cy="36" r="30" stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
-              </svg>
-              <div class="pulse-score-num" id="pulse-num">—</div>
-              <div class="pulse-score-label">Pulse</div>
-            </div>
-            <div class="pulse-info">
-              <div class="pulse-org-title" id="pulse-title">Org Health</div>
-              <div class="pulse-org-sub" id="pulse-sub">Calculating…</div>
-            </div>
-          </div>
-          <div class="pulse-divider"></div>
-          <div class="pulse-metrics">
-            <div class="pulse-metric"><div class="pulse-metric-val" id="pm-compliance">—</div><div class="pulse-metric-label">Compliance</div></div>
-            <div class="pulse-metric"><div class="pulse-metric-val" id="pm-blockers">—</div><div class="pulse-metric-label">Open Blockers</div></div>
-            <div class="pulse-metric"><div class="pulse-metric-val" id="pm-today">—</div><div class="pulse-metric-label">Updates Today</div></div>
-            <div class="pulse-metric"><div class="pulse-metric-val" id="pm-streak">—</div><div class="pulse-metric-label">Avg Confidence</div></div>
-          </div>
-          <div class="pulse-divider"></div>
-          <div class="pulse-sparkline">
-            <div class="sparkline-bars" id="sparkline-bars"></div>
-            <div class="pulse-trend" id="pulse-trend"></div>
-          </div>
-        </div>
-
-        <!-- Department Comparison -->
-        <div class="side-panel" id="dept-compare-panel" style="display:none"></div>
-
-        <!-- Manager Digest -->
-        <div class="digest-strip" id="digest-strip" style="display:none">
-          <div class="digest-panel warn" onclick="navigateTo('dashboard')">
-            <div class="digest-panel-label">Needs Attention</div>
-            <div class="digest-panel-count" id="d-attention">0</div>
-            <div class="digest-panel-desc">teams below Pulse 65</div>
-          </div>
-          <div class="digest-panel danger" onclick="showEscalationFocus()">
-            <div class="digest-panel-label">Blockers Escalating</div>
-            <div class="digest-panel-count" id="d-blockers">0</div>
-            <div class="digest-panel-desc">critical or 24h+ unresolved</div>
-          </div>
-          <div class="digest-panel ok" onclick="showMissingFocus()">
-            <div class="digest-panel-label">Missing Updates</div>
-            <div class="digest-panel-count" id="d-missing">0</div>
-            <div class="digest-panel-desc">members without update today</div>
-          </div>
-        </div>
-
-        <!-- Employee Personal Strip -->
-        <div class="personal-strip" id="personal-strip" style="display:none">
-          <div class="ps-metric"><div class="ps-val" id="ps-streak">0 <span class="streak-fire">🔥</span></div><div class="ps-label">Day streak</div></div>
-          <div class="ps-divider"></div>
-          <div class="ps-metric"><div class="ps-val" id="ps-total">0</div><div class="ps-label">Total updates</div></div>
-          <div class="ps-divider"></div>
-          <div class="ps-metric"><div class="ps-val" id="ps-blockers">0</div><div class="ps-label">Open blockers</div></div>
-          <div class="ps-divider"></div>
-          <div class="ps-metric"><div class="ps-val" id="ps-last">—</div><div class="ps-label">Last update</div></div>
-        </div>
-
-        <!-- Team Health Snapshot (manager+) -->
-        <div class="team-snapshot" id="team-snapshot" style="display:none">
-          <div class="snapshot-head">
-            <div class="snapshot-title">Team Health Snapshot</div>
-            <a class="panel-action" onclick="navigateTo('teams')" style="cursor:pointer">View teams →</a>
-          </div>
-          <div id="team-snapshot-rows"></div>
-        </div>
-
-        <!-- Timeline / Grid toggle + filters -->
-        <div class="timeline-header">
-          <div class="timeline-filters">
-            <input class="filter-input" type="text" id="f-name" placeholder="🔍 Search name…" oninput="applyFilters()" style="min-width:150px">
-            <input class="filter-input" type="date" id="f-date" onchange="applyFilters()" style="min-width:130px">
-            <select class="filter-select" id="f-status" onchange="applyFilters()">
-              <option value="">All Status</option>
-              <option value="on_track">On Track</option>
-              <option value="at_risk">At Risk</option>
-              <option value="blocked">Blocked</option>
-              <option value="completed">Completed</option>
-            </select>
-            <select class="filter-select" id="f-role" onchange="applyFilters()" style="display:none">
-              <option value="">All Roles</option>
-              <option value="admin">Admin</option>
-              <option value="hr">HR</option>
-              <option value="manager">Manager</option>
-              <option value="team_leader">Team Leader</option>
-              <option value="employee">Employee</option>
-            </select>
-            <button class="filter-chip" id="chip-7d" onclick="toggle7d()">Last 7 days</button>
-            <button class="filter-chip" id="chip-review" onclick="toggleReview()">Review-ready</button>
-          </div>
-          <div class="view-toggle">
-            <button class="view-btn active" id="vbtn-timeline" onclick="setView('timeline')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:3px;vertical-align:middle"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-              Timeline
-            </button>
-            <button class="view-btn" id="vbtn-grid" onclick="setView('grid')">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline;margin-right:3px;vertical-align:middle"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-              Grid
-            </button>
-          </div>
-        </div>
-
-        <div class="dashboard-cols">
-          <div class="dashboard-main">
-            <!-- Timeline -->
-            <div id="timeline-view"></div>
-            <!-- Grid -->
-            <div id="grid-view" style="display:none" class="cards-grid"></div>
-          </div>
-          <div class="dashboard-side" id="side-panels">
-            <!-- Team health panel -->
             <div class="side-panel" id="side-team-health" style="display:none">
               <div class="panel-head"><div class="panel-title">Team Pulse</div><a class="panel-action" onclick="navigateTo('teams')" style="cursor:pointer">Details →</a></div>
               <div class="panel-body" id="side-team-rows"></div>
             </div>
-            <!-- Copilot assistant -->
             <div class="side-panel copilot-panel" id="side-copilot" style="display:none">
               <div class="panel-head">
                 <div class="panel-title">AI Copilot</div>
@@ -1804,7 +1688,7 @@ input,textarea,select{font-family:inherit;font-size:14px}
               </div>
               <div id="copilot-body" class="copilot-body"></div>
             </div>
-            <!-- Escalation queue -->
+            <div class="side-panel" id="dept-compare-panel" style="display:none"></div>
             <div class="side-panel" id="side-escalations" style="display:none">
               <div class="panel-head">
                 <div class="panel-title">🚨 Escalation Queue</div>
@@ -1812,7 +1696,6 @@ input,textarea,select{font-family:inherit;font-size:14px}
               </div>
               <div id="esc-list"></div>
             </div>
-            <!-- Missing updates panel -->
             <div class="side-panel" id="side-missing" style="display:none">
               <div class="panel-head"><div class="panel-title">Missing Today</div></div>
               <div id="missing-list"></div>
